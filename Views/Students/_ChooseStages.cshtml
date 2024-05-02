@@ -1,0 +1,117 @@
+﻿@model Student
+<link href="~/css/create.css" rel="stylesheet" />
+<form asp-controller="Students" autocomplete="off" lang="ar"  enctype="multipart/form-data" method="post">
+	<div asp-validation-summary="ModelOnly" role="alert" class="text-danger"></div>
+
+<div class="labels row gy-3 gy-md-4 overflow-hidden">
+	@{
+		if (ViewBag.parents != null)
+		{
+
+			<div class="sec2 col-12">
+				<label class="form-label">المرحلة الدراسية<span class="text-danger">*</span></label>
+					<select id="ParentStageId" aria-required="true" name="parentid" asp-for="ParentStageId" asp-items="ViewBag.parents">
+						@{
+							var hasParents = (ViewBag.parents as SelectList)?.Any() ?? false;
+
+							if (hasParents)
+							{
+								<option value="" selected>اختار المرحلة الدراسية</option>
+							}
+							else
+							{
+								<option value="" selected>لايوجد مراحل دراسية</option>
+							}
+						}
+					</select>
+				<span asp-validation-for="ParentStageId" class="text-danger"></span>
+
+			</div>
+			@if (ViewBag.Childs != null)
+			{
+
+				<div class="sec2 col-12">
+					<label class="form-label">الجروب<span class="text-danger">*</span></label>
+						<select id="ChildStageId" name="childid" asp-for="ChildStageId" asp-items="ViewBag.Childs">
+						<option selected>اختار الجروب</option>
+
+					</select>
+					<span asp-validation-for="ChildStageId" class="text-danger"></span>
+
+				</div>
+			}
+		}
+		else
+		{
+			<div class="sec2 col-12">
+				<h4>يرجى انشاء مرحلة دراسية</h4>
+				<a asp-controller="AddStages" asp-action="GetAllStags" class="btn btn-dark"> انشاء مرحلة دراسية</a>
+
+			</div>
+		}
+	}
+		<div class="con2" style="	display: flex;
+	justify-content: center;
+	align-items: center;
+    padding: 0px 28px;
+">
+			<div class="col-6" style="
+    margin-left: 11px;
+
+">
+				<div class="d-grid">
+					<input class="btn bsb-btn-xl btn-primary" type="submit" asp-action="display_Student" value="عرض طلاب الجروب" />
+
+				</div>
+			</div>
+			<div class="col-6">
+				<div class="d-grid">
+					<input class="btn bsb-btn-xl btn-primary" asp-action="display_Student" type="submit" value="عرض طلاب المرحلة" />
+				</div>
+			</div>
+		</div>
+</div>
+
+</form>
+
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var parentSelect = document.querySelector('[name="parentid"]');
+		var childSelect = document.querySelector('[name="childid"]');
+
+		childSelect.disabled = true; 
+		parentSelect.addEventListener("change", function () {
+			var selectedParentId = parentSelect.value;
+
+			childSelect.disabled = true;
+
+			childSelect.innerHTML = '<option selected value="">اختر الجروب</option>';
+
+			if (selectedParentId) {
+				fetch('/Teachers/GetChildStages?parentId=' + selectedParentId)
+					.then((response) => response.json())
+					.then((data) => {
+						data.forEach((child) => {
+							var option = new Option(child.text, child.value);
+							childSelect.add(option);
+						});
+						childSelect.disabled = false;
+
+					})
+					.catch((error) => console.log(error));
+			}
+		});
+
+
+	});
+</script>
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+	}
+}

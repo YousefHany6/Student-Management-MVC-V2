@@ -1,0 +1,26 @@
+﻿@model ParentStage
+
+
+
+
+ <div class="container" dir="rtl">
+  <h3 class="header">اضافة مرحلة دراسية</h3>
+  <div class="card">
+   <div class="card-body">
+<form  enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="text" asp-for="Name" class="form-control" placeholder="اضافة مرحلة دراسية">
+    <span asp-validation-for="Name" class="text-danger"></span>
+
+    <button asp-action="Create_Parent_S" asp-controller="AddStages" type="submit" class="btn btn-primary">حفظ</button>
+</form>
+   </div>
+  </div>
+ </div>
+
+
+@section Scripts {
+ <partial name="_ValidationScriptsPartial" />
+}
+

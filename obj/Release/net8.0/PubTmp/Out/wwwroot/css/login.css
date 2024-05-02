@@ -1,0 +1,12 @@
+﻿body {
+	background-image: url("..//img/login.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+}
+
+@media (max-width: 576px) {
+	.container {
+		padding-top: 20px;
+	}
+}

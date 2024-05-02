@@ -1,0 +1,40 @@
+﻿@model ChildStage
+
+
+ <div class="container" dir="rtl">
+  <h3 class="header">اضافة جروب</h3>
+  <div class="card">
+   <div class="card-body">
+<form  enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <select asp-for="ParentStageId" name="parrid" aria-required="true" asp-items="ViewBag.parents" placeholder="">
+     @{
+      var hasParents = (ViewBag.parents as SelectList)?.Any() ?? false;
+
+      if (hasParents)
+      {
+       <option value="" selected>اختار المرحلة الدراسية</option>
+      }
+      else
+      {
+       <option value="" selected>لايوجد مراحل دراسية</option>
+      }
+     }
+    </select>
+
+    <span asp-validation-for="ParentStageId" class="text-danger"></span>
+
+    <input type="text" asp-for="Name" class="form-control inpt" placeholder="اضافة جروب">
+    <span asp-validation-for="Name" class="text-danger"></span>
+    <button type="submit" asp-action="Create_Child_S" asp-controller="AddStages" class="btn btn-primary">حفظ</button>
+</form>
+   </div>
+  </div>
+ </div>
+
+
+@section Scripts {
+ <partial name="_ValidationScriptsPartial" />
+}
+

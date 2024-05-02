@@ -1,0 +1,74 @@
+:root {
+	--body-color: #E4E9F7;
+	--sidebar-color: #FFF;
+	--primary-color: #695CFE;
+	--primary-color-light: #F6F5FF;
+	--toggle-color: #DDD;
+	--text-color: #707070;
+	--tran-02: all 0.2s ease;
+	--tran-03: all 0.3s ease;
+	--tran-04: all 0.4s ease;
+	--tran-05: all 0.5s ease;
+}
+
+ul {
+	margin-bottom: 0px !important;
+}
+
+span {
+	color: #565656;
+	display: block;
+	padding-bottom: 11px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+ul.cards {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: center;
+	justify-content: center;
+	align-items: center;
+}
+
+a {
+	text-decoration: none !important;
+}
+
+.cards li {
+	overflow: hidden;
+	display: inline-block;
+	height: 115px;
+	transition: .3s;
+	width: calc(50% - 60px);
+	max-width: 300px;
+	min-width: 100px;
+	color: var(--text-color);
+	padding: 10px 0px 10px 0px;
+	margin: 20px 20px;
+	text-align: center;
+	background: #e0e0e0;
+	border: solid 2px #dcdcdc;
+}
+
+	.cards li i {
+		margin: 8px 0px 9px 0px;
+		display: block;
+		transition: 1s;
+		font-size: 45px;
+		display: block;
+		color: #ff7878;
+	}
+
+	.cards li:hover {
+		transform: scale(1.1);
+	}
+
+		.cards li:hover i {
+			transform: rotate(360deg);
+		}
+
+.dark-mode-card {
+	background-color: #333;
+	color: #fff;
+}

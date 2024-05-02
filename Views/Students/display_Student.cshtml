@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Student>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+<style>
+	table.dataTable thead th, table.dataTable td {
+		text-align: center;
+	}
+
+	.modal-backdrop {
+		position: relative;
+	}
+</style>
+
+<partial name="_ChooseStages" model="new Student()" />
+@{
+	var count = 0;
+	if (Model != null)
+	{
+		if (Model.Count() != 0)
+		{
+
+			<div class="table-responsive" style="margin-top:20px;">
+				<table id="example" class="table table-striped" style="width:100%; text-align:center;">
+						<thead>
+							<tr>
+
+								<th>#</th>
+								<th>اسم الطالب</th>
+								<th>الجروب</th>
+								<th>المواد</th>
+								<th>الاعدادات</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach (var item in Model)
+							{
+
+								<tr>
+									<td>
+										@{
+											count++;
+										}
+										@count
+									</td>
+									<td>@item.Student_Name</td>
+									<td>@item.ChildStage.Name</td>
+									<td>
+										@{
+											if (item.StudentCourses != null)
+											{
+												foreach (var courses in item.StudentCourses)
+												{
+													<text>@courses.Course.Course_Name</text>
+													<br />
+												}
+											}
+										}
+									</td>
+									<td>
+										<form enctype="multipart/form-data" asp-antiforgery="true" asp-controller="Students"
+																asp-action="Edit_Student" asp-route-id="@item.Student_ID" asp-route-childid="@item.ChildStageId" asp-route-parentid="@item.ParentStageId"
+															method="post" style="
+						display: contents;
+									">
+										<button type="submit" class="btn btn-primary" style="
+																width: 50px;">
+											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+																class="bi bi-pencil-square" viewBox="0 0 16 16">
+												<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+												<path fill-rule="evenodd"
+																		d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+											</svg>
+										</button>
+										</form>
+									<button data-bs-toggle="modal" data-bs-target="#exampleModal_@item.Student_ID" class="btn btn-danger" style="
+																		width: 50px;">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+															class="bi bi-trash3" viewBox="0 0 16 16">
+											<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+										</svg>
+									</button>
+									</td>
+								</tr>
+								<div class="modal fade" id="exampleModal_@item.Student_ID" tabindex="-1" aria-labelledby="exampleModal_@item.Student_ID" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												<h5 class="modal-title" id="exampleModalLabel_@item.Student_ID">تأكيد الحذف</h5>
+											</div>
+											<div class="modal-body">
+												هل تريد حذف الطالب : @item.Student_Name ؟
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+												<form autocomplete="off" lang="ar" enctype="multipart/form-data" method="post">
+
+													<input type="submit" asp-controller="Students" asp-action="delete_Student" asp-route-id="@item.Student_ID" value="حذف" class="btn btn-danger" />
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							}
+							<div id="noTeacherFoundMessage" style="display: none;margin-top: 10px;margin-bottom: 10px;text-align: center;font-size: 30px;color: red;font-weight: 900;">
+								لا يوجد طالب بهذا الاسم
+							</div>
+
+						</tbody>
+					</table>
+				</div>
+
+		}
+		else
+		{
+			<div class="table">
+				<div class="table_header">
+					<div style="    display: flex;
+						flex-direction: column;">
+						<h1>لا يوجد طلاب لهذه المرحلة </h1>
+						<a asp-controller="Students" asp-action="Add_Student" class="btn btn-primary"> انشاء طالب جديد</a>
+
+					</div>
+				</div>
+			</div>
+		}
+	}
+	else
+	{
+		<div class="table">
+			<div class="table_header">
+				<div>
+					<h1>يرجى اختيار مرحلة لعرض الطلاب </h1>
+
+				</div>
+			</div>
+		</div>
+	}
+	}
+
+
+@section Scripts {
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+	<script src="https://cdn.datatables.net/plug-ins/1.10.25/i18n/Arabic.json"></script>
+	<script>
+		$(document).ready(function () {
+			$('#example').DataTable({
+				"language": {
+					"url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Arabic.json"
+				}
+			});
+		});
+	</script>
+
+}
+

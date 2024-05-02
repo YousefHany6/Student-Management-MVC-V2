@@ -1,0 +1,49 @@
+﻿@model FStudentManagement.Models.Course
+<link href="~/css/page3.css" rel="stylesheet" />
+<div class="container">
+ <div class="card mt-5">
+  <div class="card-body" dir="rtl">
+   <form asp-controller="Courses" asp-action="Create_Course" enctype="multipart/form-data" method="post">
+    <div asp-validation-summary="ModelOnly" role="alert"  class="text-danger"></div>
+    <div class="row">
+     <div class="col-lg-6 col-md-6 col-sm-12">
+      <label asp-for="Course_Name" class="form-label">اسم المادة الدراسية<span class="text-danger">*</span></label>
+      <input asp-for="Course_Name" class="form-control">
+      <span asp-validation-for="Course_Name" class="text-danger"></span>
+     </div>
+     <div class="col-lg-6 col-md-6 col-sm-12">
+      <label asp-for="ParentStageId" class="form-label">المرحلة الدراسية<span class="text-danger">*</span></label>
+      <select asp-for="ParentStageId" asp-items="ViewBag.parents" class="form-select">
+       @{
+        var hasParents = (ViewBag.parents as SelectList)?.Any() ?? false;
+
+        if (hasParents)
+        {
+         <option value="" selected>اختار المرحلة الدراسية</option>
+        }
+        else
+        {
+         <option value="" selected>لايوجد مراحل دراسية</option>
+        }
+       }
+      </select>
+      <span asp-validation-for="ParentStageId" class="text-danger"></span>
+     </div>
+    </div>
+    <div class="con">
+     <button class="btn btn-lg btn-primary mt-4 m-auto" type="submit">انشاء</button>
+    </div>
+   </form>
+  </div>
+ </div>
+</div>
+
+
+
+
+
+@section Scripts {
+ @{
+  await Html.RenderPartialAsync("_ValidationScriptsPartial");
+ }
+}

@@ -1,0 +1,118 @@
+﻿@model FStudentManagement.Models.Course
+
+
+
+<h1>تعديل المواد</h1>
+<link href="~/css/page3.css" rel="stylesheet" />
+<div class="container">
+	<div class="card mt-5">
+		<div class="card-body" dir="rtl">
+			<form asp-controller="Courses" asp-action="Edit_Course" enctype="multipart/form-data" method="post">
+				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+				<input asp-for="Course_ID" value="@Model.Course_ID" type="hidden">
+				<div class="row">
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						<label asp-for="Course_Name" class="form-label">اسم الكورس<span class="text-danger">*</span></label>
+						<input asp-for="Course_Name" value="@Model.Course_Name" class="form-control">
+						<span asp-validation-for="Course_Name" class="text-danger"></span>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-12">
+						<label asp-for="ParentStageId"  class="form-label">المرحلة الدراسية<span class="text-danger">*</span></label>
+						<select  asp-for="ParentStageId"  asp-items="ViewBag.parents" class="form-select"  disabled>
+							<option value="">اختار المرحلة الدراسية</option>
+						</select>
+						<input name="coursee" value="@ViewBag.cours" hidden />
+						<span asp-validation-for="ParentStageId" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="con">
+					<button class="btn btn-lg btn-primary mt-4 m-auto" type="submit">تعديل</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var parentSelect = document.querySelector('[name="ParentStageId"]');
+		var childSelect = document.querySelector('[name="ChildStageId"]');
+		var termSelect = document.querySelector('[name="TermStageId"]');
+
+		// Disable child and term selects initially
+		childSelect.disabled = true;
+		termSelect.disabled = true;
+
+		// Event listener for parent select change
+		parentSelect.addEventListener("change", function () {
+			var selectedIndex = parentSelect.selectedIndex;
+			var selectedParentId = parentSelect.value;
+
+			if (selectedIndex === 0) {
+				// If no parent stage is selected
+				childSelect.disabled = true;
+				termSelect.disabled = true;
+			} else {
+				// Enable child select
+				childSelect.disabled = false;
+
+				// Clear previous options in child and term selects
+				childSelect.innerHTML = '<option selected value="">اختر السنة الدراسية</option>';
+				termSelect.innerHTML = '<option selected value="">اختر القسم</option>';
+
+				// Fetch data for child based on the selected parent
+				fetch('/Teachers/GetChildStages?parentId=' + selectedParentId)
+					.then((response) => response.json())
+					.then((data) => {
+						data.forEach((child) => {
+							var option = document.createElement("option");
+							option.value = child.value;
+							option.text = child.text;
+							childSelect.appendChild(option);
+						});
+					})
+					.catch((error) => console.log(error));
+			}
+		});
+
+		// Event listener for child select change
+		childSelect.addEventListener("change", function () {
+			var selectedIndex = childSelect.selectedIndex;
+			var selectedChildId = childSelect.value;
+
+			if (selectedIndex === 0) {
+				// If no child stage is selected
+				termSelect.disabled = true;
+			} else {
+				// Enable term select
+				termSelect.disabled = false;
+
+				// Clear previous options in term select
+				termSelect.innerHTML = '<option selected value="">اختر القسم</option>';
+
+				// Fetch data for terms based on the selected child
+				fetch('/Teachers/GetTermStages?childId=' + selectedChildId)
+					.then((response) => response.json())
+					.then((data) => {
+						data.forEach((term) => {
+							var option = document.createElement("option");
+							option.value = term.value;
+							option.text = term.text;
+							termSelect.appendChild(option);
+						});
+					})
+					.catch((error) => console.log(error));
+			}
+		});
+	});
+</script>
+
+
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

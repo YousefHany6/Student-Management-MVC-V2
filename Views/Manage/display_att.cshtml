@@ -1,0 +1,132 @@
+﻿@model IEnumerable<StudentAttendance>
+
+<style>
+	th {
+		background: #58595b !important;
+		color: white !important;
+		font-size: 20px !important;
+		font-weight: 800 !important;
+	}
+</style>
+<h1>نعديل الجدول</h1>
+<form enctype="multipart/form-data" method="post">
+
+	<table class="table" style="
+    text-align: center;
+">
+		<thead>
+			<tr>
+				<th>
+					اسم الطالب
+				</th>
+				<th>
+					تسجيل
+				</th>
+				<th>
+					حالة الطالب
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var attendance in Model)
+			{
+				<tr>
+					<td>
+						@if (attendance.Student != null)
+						{
+							@attendance.Student.Student_Name
+							<input type="hidden" name="students" value="@attendance.StudentId" />
+						}
+						else
+						{
+							<span>Student information not available</span>
+						}
+					</td>
+					<td>
+						<input class="form-check-input" name="attstate" type="checkbox" value="@attendance.StudentId" @(attendance.IsPresent ? "checked" : "") data-attendanceid="@attendance.AttendanceId" />
+
+					</td>
+					<td>
+
+						<span>@(attendance.IsPresent ? "حاضر" : "غائب")</span>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	<input type="hidden" name="tabid" value="@ViewBag.table" />
+	<div style="
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					flex-wrap: wrap;
+					margin-top: 32px;
+		">
+
+		<input asp-controller="Manage" width="500px" asp-action="edit_done" type="submit" value="حفظ تعديل الجدول" class="btn btn-primary  btn-lg" />
+	</div>
+</form>
+<a style="
+							float: left;
+							margin: 14px;
+							font-size: 25px;
+
+												" asp-controller="Manage" asp-action="Edit_attendance" class="btn btn-primary">
+	رجوع
+</a>
+<form autocomplete="off" lang="ar" dir="rtl" enctype="multipart/form-data" method="post">
+
+	<button type="button" style="					margin: 14px;
+							font-size: 25px;" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+		حذف
+	</button>
+
+	<!-- Modal for delete confirmation -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="deleteModalLabel">تأكيد الحذف</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					هل تريد حذف هذا الجدول؟
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+					<!-- Submit button inside the modal form -->
+					<button asp-controller="Manage"
+													asp-action="delete_Table"
+													type="submit" asp-route-id="@ViewBag.table" class="btn btn-danger">
+						حذف
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const checkboxes = document.querySelectorAll('.form-check-input');
+
+		checkboxes.forEach(checkbox => {
+			checkbox.addEventListener('change', function () {
+				const statusSpan = this.parentNode.nextElementSibling.querySelector('span');
+				if (this.checked) {
+					statusSpan.textContent = "حاضر";
+					statusSpan.style.color = "green";
+					statusSpan.style.fontSize = "20px";
+				} else {
+					statusSpan.textContent = "غائب";
+					statusSpan.style.color = "red";
+					statusSpan.style.fontSize = "20px";
+				}
+
+				const attendanceId = this.getAttribute('data-attendanceid');
+
+			});
+		});
+	});
+</script>
+

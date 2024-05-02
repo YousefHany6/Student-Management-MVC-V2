@@ -1,0 +1,62 @@
+﻿<link href="~/css/card.css" rel="stylesheet" />
+<ul class="cards">
+	<li>
+		<a asp-controller="AddStages" asp-action="GetAllStags">
+			<i class='bx bxs-coin-stack'></i>
+			<span>عرض المراحل الدراسية</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="AddStages" asp-action="GetAllStags">
+			<i class='bx bxs-coin-stack'></i>
+			<span>اضافة مرحلة دراسية</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="Courses" asp-action="Courses">
+			<i class="fa-solid fa-book"></i>						<span>عرض المواد</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="Courses" asp-action="Courses">
+			<i class="fa-solid fa-book"></i>						<span>اضافة مادة</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="Teachers" asp-action="Add_Teacher">
+			<i class="fa-solid fa-book-open-reader"></i>						<span>اضافة معلم</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="Teachers" asp-action="display_th">
+			<i class="fa-solid fa-book-open-reader"></i>						<span>اعدادات المعلمين</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="Teachers" asp-action="addnewstage">
+			<i class="fa-solid fa-book-open-reader"></i>
+			<span>اضافة مرحلة  للمعلم </span>
+		</a>
+	</li>
+
+	<li>
+		<a asp-controller="Students" asp-action="display_Student">
+			<i class="fa-solid fa-user-graduate"></i>						<span>عرض الطلاب</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="Students" asp-action="Add_Student">
+			<i class="fa-solid fa-user-graduate"></i>						<span>اضافة طالب</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="Manage" asp-action="Create_Table">
+			<i class="fa-solid fa-book-open"></i>						<span>تسجيل الحضور</span>
+		</a>
+	</li>
+	<li>
+		<a asp-controller="Manage" asp-action="Edit_attendance">
+			<i class="fa-solid fa-book-open"></i>						<span>عرض جدول الحضور</span>
+		</a>
+	</li>
+</ul>

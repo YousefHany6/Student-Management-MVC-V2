@@ -1,0 +1,192 @@
+﻿@model Student
+<link href="~/css/create.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.css">
+
+<body>
+	<section class="p-3 p-md-4 p-xl-5">
+		<form asp-controller="Students" autocomplete="off" lang="ar" asp-action="Add_Student" enctype="multipart/form-data" method="post">
+			<div asp-validation-summary="ModelOnly" role="alert" class="text-danger"></div>
+			<div class="container" dir="ltr">
+				<div class="card border-light-subtle shadow-sm">
+					<div class="con1">
+						<div class="col-12">
+							<div class="mb-5">
+								<h2 class="h3">انشاء طالب</h2>
+								<h3 class="fs-6 fw-normal text-secondary m-0 ">ادخل بيانات الطالب</h3>
+							</div>
+						</div>
+					</div>
+					<div class="row g-0">
+						<div class="col-12 col-md-6" dir="rtl">
+							<div class="p-3 p-md-4 p-xl-5 ">
+								<div dir="rtl">
+									<div class="labels row gy-3 gy-md-4 overflow-hidden">
+										<div class="col-12">
+											<label  asp-for="PhoneNumber" class="form-label">رقم الهاتف<span class="text-danger">*</span></label>
+											<div class="input-group mb-3" dir="ltr">
+												<input type="tel" asp-for="PhoneNumber" class="form-control" id="phoneNumber" placeholder="ادخل رقم هاتفك" aria-describedby="basic-addon1" style="padding-left: 88px; width: 27rem;">
+											</div>
+											<span asp-validation-for="PhoneNumber " class="text-danger"></span>
+											<input type="hidden" asp-for="CountryCode" id="countryCode" value="" />
+
+										</div>
+
+										@{
+											if (ViewBag.parents != null)
+											{
+
+												<div class="sec2 col-12">
+													<label class="form-label">المرحلة الدراسية<span class="text-danger">*</span></label>
+													<select aria-required="true" asp-for="ParentStageId" asp-items="ViewBag.parents">
+														@{
+															var hasParents = (ViewBag.parents as SelectList)?.Any() ?? false;
+
+															if (hasParents)
+															{
+																<option value="" selected>اختار المرحلة الدراسية</option>
+															}
+															else
+															{
+																<option value="" selected>لايوجد مراحل دراسية</option>
+															}
+														}
+													</select>
+													<span asp-validation-for="ParentStageId" class="text-danger"></span>
+
+												</div>
+												@if (ViewBag.Childs != null)
+												{
+
+													<div class="sec2 col-12">
+														<label class="form-label">الجروب<span class="text-danger">*</span></label>
+														<select aria-required="true" asp-for="ChildStageId" asp-items="ViewBag.Childs">
+															<option selected>اختار الجروب</option>
+
+														</select>
+														<span asp-validation-for="ChildStageId" class="text-danger"></span>
+
+													</div>
+
+												}
+											}
+											else
+											{
+												<div class="sec2 col-12">
+													<h4>يرجى انشاء مرحلة دراسية</h4>
+													<a asp-controller="AddStages" asp-action="GetAllStags" class="btn btn-dark"> انشاء مرحلة دراسية</a>
+
+												</div>
+											}
+										}
+									</div>
+								</div>
+
+							</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="card-body p-3 p-md-4 p-xl-5 mb-3">
+								<div dir="rtl">
+									<div class="labels row gy-3 gy-md-4 overflow-hidden">
+										<div class="col-12">
+											<label for="firstName" asp-for="Student_Name" class="form-label">اسم الطالب<span class="text-danger">*</span></label>
+											<input type="text" asp-for="Student_Name" class="form-control" id="firstName" placeholder="اسم الطالب">
+											<span asp-validation-for="Student_Name" class="text-danger"></span>
+
+										</div>
+										<div class="col-12">
+											<label for="email" asp-for="SUser.Email" class="form-label">البريد الالكتروني<span class="text-danger">*</span></label>
+											<input type="email" asp-for="SUser.Email" class="form-control" id="email" placeholder="name@example.com">
+											<span asp-validation-for="SUser.Email" class="text-danger"></span>
+
+										</div>
+										<div class="col-12">
+											<label for="password" asp-for="SUser.PasswordHash" class="form-label">كلمة المرور <span class="text-danger">*</span></label>
+											<input type="password" asp-for="SUser.PasswordHash" class="form-control" id="password">
+
+										</div>
+
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+					<div class="con2">
+						<div class="col-12">
+							<div class="d-grid">
+								<input class="btn bsb-btn-xl btn-primary" type="submit" value="انشاء" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+
+
+
+
+
+
+@section Scripts {
+	@await Html.PartialAsync("_ValidationScriptsPartial")
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/libphonenumber/8.12.18/libphonenumber.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			var input = document.querySelector("#phoneNumber");
+			var countryCodeInput = document.querySelector("#countryCode");
+
+			var iti = window.intlTelInput(input, {
+				utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js",
+				initialCountry: "auto",
+				separateDialCode: true,
+				nationalMode: false,
+				formatOnDisplay: true,
+				autoPlaceholder: "aggressive",
+				placeholderNumberType: "MOBILE",
+				allowDropdown: true,
+				geoIpLookup: function (callback) {
+					fetch('https://ipinfo.io', { headers: { 'Accept': 'application/json' } })
+						.then(response => response.json())
+						.then(data => callback(data.country || ''));
+				},
+				maxDigits: 15,
+			});
+			input.addEventListener('countrychange', function (e) {
+				var selectedCountryCode = iti.getSelectedCountryData().dialCode;
+				console.log("Selected Country Code:", selectedCountryCode);
+				countryCodeInput.value = selectedCountryCode;
+			});
+
+
+			var parentSelect = document.querySelector('[name="ParentStageId"]');
+			var childSelect = document.querySelector('[name="ChildStageId"]');
+			childSelect.disabled = true;
+
+			parentSelect.addEventListener("change", function () {
+				var selectedParentId = parentSelect.value;
+				childSelect.disabled = true;
+				childSelect.innerHTML = '<option selected value="">اختر الجروب</option>';
+				if (selectedParentId) {
+					fetch('/Teachers/GetChildStages?parentId=' + selectedParentId)
+						.then((response) => response.json())
+						.then((data) => {
+							data.forEach((child) => {
+								var option = new Option(child.text, child.value);
+								childSelect.add(option);
+							});
+							childSelect.disabled = false;
+						})
+						.catch((error) => console.log(error));
+				}
+			});
+		});
+	</script>
+}
+
+
+

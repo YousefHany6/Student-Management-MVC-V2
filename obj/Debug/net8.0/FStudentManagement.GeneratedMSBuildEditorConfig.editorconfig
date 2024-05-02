@@ -1,0 +1,187 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = FStudentManagement
+build_property.RootNamespace = FStudentManagement
+build_property.ProjectDir = D:\المشاريع\Student_Managment\FStudentManagement-V2\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\المشاريع\Student_Managment\FStudentManagement-V2
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Areas/Identity/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Areas/Identity/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Areas/Identity/Pages/Account/_Layout2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfTGF5b3V0Mi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Areas/Identity/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/AddStages/Edit_Child_Stage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkU3RhZ2VzXEVkaXRfQ2hpbGRfU3RhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/AddStages/Edit_Parent_Stage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkU3RhZ2VzXEVkaXRfUGFyZW50X1N0YWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/AddStages/GetAllStags.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkU3RhZ2VzXEdldEFsbFN0YWdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/AddStages/_Add_Child_Stage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkU3RhZ2VzXF9BZGRfQ2hpbGRfU3RhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/AddStages/_Add_Parent_Stage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRkU3RhZ2VzXF9BZGRfUGFyZW50X1N0YWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Courses/Courses.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlc1xDb3Vyc2VzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Courses/Edit_Course.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlc1xFZGl0X0NvdXJzZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Courses/_Add_Course.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291cnNlc1xfQWRkX0NvdXJzZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Manage/attendance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXGF0dGVuZGFuY2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Manage/Create_Table.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXENyZWF0ZV9UYWJsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Manage/display_att.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXGRpc3BsYXlfYXR0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Manage/Edit_attendance.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXEVkaXRfYXR0ZW5kYW5jZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Manage/false_std.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXGZhbHNlX3N0ZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Manage/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Students/Add_Student.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcQWRkX1N0dWRlbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Students/display_Student.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcZGlzcGxheV9TdHVkZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Students/Edit_Student.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcRWRpdF9TdHVkZW50LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Students/Errorstd.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcRXJyb3JzdGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Students/_ChooseStages.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudHNcX0Nob29zZVN0YWdlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Student_DashBoard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3R1ZGVudF9EYXNoQm9hcmRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Teachers/addnewstage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcYWRkbmV3c3RhZ2UuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Teachers/Add_Teacher.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcQWRkX1RlYWNoZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Teachers/display_th.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcZGlzcGxheV90aC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Teachers/edit_th.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcnNcZWRpdF90aC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Teacher_DashBoard/choosegroup.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcl9EYXNoQm9hcmRcY2hvb3NlZ3JvdXAuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/Teacher_DashBoard/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVhY2hlcl9EYXNoQm9hcmRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/المشاريع/Student_Managment/FStudentManagement-V2/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

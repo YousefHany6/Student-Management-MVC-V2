@@ -1,0 +1,32 @@
+﻿@model FStudentManagement.Models.ParentStage
+
+
+
+<h1>تعديل المرحلة الدراسية</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+  <form asp-controller="AddStages" asp-action="Edit_Parent_Stage">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ParentStageId" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">اسم المرحلة الدراسية</label>
+                <input asp-for="Name" class="form-control" value="@Model.Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div style="margin-top:10px;" class="form-group">
+                <input type="submit" value="تعديل" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="margin-top:10px;">
+ <a asp-controller="AddStages" asp-action="GetAllStags">رجوع الى القائمة</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

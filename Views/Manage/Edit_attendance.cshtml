@@ -1,0 +1,112 @@
+﻿@model Attendance
+<link href="~/css/display.css" rel="stylesheet" />
+<style>
+	.modal-backdrop {
+		position: relative;
+	}
+</style>
+
+<form asp-controller="Manage" autocomplete="off" lang="ar"  enctype="multipart/form-data" method="post">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+	<div class="container">
+		<div class="card mt-1">
+			<div class="card-body" dir="rtl">
+				<div class="row mt-3" style="
+                        display: flex;
+                        align-content: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        align-items: center;
+																												">
+					@if (ViewBag.courses != null)
+					{
+						<div class="col-6">
+							<label class="form-label">المادة<span class="text-danger">*</span></label>
+							<select name="Course_ID" asp-items="ViewBag.courses" required>
+								@{
+									var hasParents = (ViewBag.courses as SelectList)?.Any() ?? false;
+
+									if (hasParents)
+									{
+										<option selected>اختار المادة الدراسية</option>
+									}
+									else
+									{
+										<option value="" selected>لايوجد مواد دراسية</option>
+									}
+								}
+							</select>
+						</div>
+					}
+					else
+					{
+						<div class="sec2 col-12">
+							<h4>لا يوجد مواد دراسية </h4>
+							<a asp-controller="AddStages" asp-action="GetAllStags" class="btn btn-dark">انشاء مادة دراسية  جديده</a>
+						</div>
+					}
+					<div class="col-6">
+						<label class="form-label">تاريخ الجدول<span class="text-danger">*</span></label>
+						<select name="tableid" asp-items="ViewBag.att" required>
+							<option selected>اختار التاريخ</option>
+						</select>
+					</div>
+					<div class="con2" style="
+    margin-top: 8px;
+">
+						<div class="col-12" >
+							<div class="d-grid">
+								<input class="btn bsb-btn-xl btn-primary" asp-action="Edit_attendance" type="submit" value=" تعديل جدول تسجيل الحضور" />
+							</div>
+						</div>
+						<div class="col-12">
+							<div class="d-grid">
+								<input style="margin-top:10px;" class="btn bsb-btn-xl btn-primary" asp-action="false_std" type="submit" value="عرض الطلاب الغائيبين" />
+						</div>
+					</div>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var parentSelect = document.querySelector('[name="Course_ID"]');
+		var childSelect = document.querySelector('[name="tableid"]');
+
+		childSelect.disabled = true;
+		parentSelect.addEventListener("change", function () {
+			var selectedParentId = parentSelect.value;
+
+			childSelect.disabled = true;
+
+			childSelect.innerHTML = '<option selected value="">اختر التاريخ</option>';
+
+			if (selectedParentId) {
+				fetch('/Manage/GetDatesByTeacherAndCourse?Course_ID=' + selectedParentId)
+					.then((response) => response.json())
+					.then((data) => {
+						if (data.length > 0) {
+							data.forEach((child) => {
+								var option = new Option(child.text, child.value);
+								childSelect.add(option);
+							});
+							childSelect.disabled = false;
+						} else {
+							alert('لا يوجد جداول لهذه المادة');
+						}
+					})
+					.catch((error) => console.log(error));
+			}
+		});
+	});
+</script>
+
+
+
+

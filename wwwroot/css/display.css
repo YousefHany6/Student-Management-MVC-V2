@@ -1,0 +1,39 @@
+﻿body {
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: auto;
+}
+
+
+select:disabled {
+	opacity: 0.6 !important;
+}
+select,.inp {
+	display: block;
+	width: 100%;
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: var(--bs-body-color);
+	background-color: var(--bs-body-bg);
+	background-clip: padding-box;
+	border: var(--bs-border-width) solid var(--bs-border-color);
+	border-radius: var(--bs-border-radius);
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.con1 {
+	align-items: center;
+	justify-content: center;
+}
+
+.con2 {
+	width: 50%;
+	margin: auto;
+	text-align: center;
+}
+
+.btn {
+	width: 500px;
+}

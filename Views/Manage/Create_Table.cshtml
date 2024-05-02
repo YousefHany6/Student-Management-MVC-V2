@@ -1,0 +1,147 @@
+﻿@model Teacher
+<link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/registrations/registration-5/assets/css/registration-5.css">
+<link href="~/css/display.css" rel="stylesheet" />
+
+<form asp-controller="Manage" autocomplete="off" lang="ar" asp-action="create_table" enctype="multipart/form-data" method="post">
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+	<div class="container">
+		<div class="card mt-1">
+			<div class="card-body" dir="rtl">
+				<div class="row">
+					@{
+						if (ViewBag.parents != null)
+						{
+							<div class="col-12">
+								<label class="form-label">المرحلة الدراسية<span class="text-danger">*</span></label>
+								<select id="ParentStageId" required  name="parentid" asp-items="ViewBag.parents">
+         @{
+          var hasParents = (ViewBag.parents as SelectList)?.Any() ?? false;
+
+          if (hasParents)
+          {
+           <option value="" selected>اختار المرحلة الدراسية</option>
+          }
+          else
+          {
+           <option value="" selected>لايوجد مراحل دراسية</option>
+          }
+         }
+								</select>
+							</div>
+							@if (ViewBag.Childs != null)
+							{
+								<div class="col-12">
+									<label class="form-label">الجروب<span class="text-danger">*</span></label>
+									<select id="ChildStageId" required name="childid" asp-items="ViewBag.Childs">
+          <option selected>اختار الجروب</option>
+
+									</select>
+								</div>
+								<div>
+									@if (ViewBag.courses != null)
+									{
+										<div class="col-12">
+											<label class="form-label">المادة<span class="text-danger">*</span></label>
+											<select name="courseid" required asp-items="ViewBag.courses">
+												<option selected>اختار المادة الدراسية</option>
+
+											</select>
+										</div>
+									}
+									<div class="col-12">
+										<label class="form-label">التاريخ<span class="text-danger">*</span></label>
+										<input type="text" class="inp" value="@DateTime.Now" name="datenow" readonly />
+
+									</div>
+								</div>
+							}
+						}
+						else
+						{
+							<div class="sec2 col-12">
+								<h4>يرجى انشاء مرحلة دراسية</h4>
+								<a asp-controller="AddStages" asp-action="GetAllStags" class="btn btn-dark"> انشاء مرحلة دراسية</a>
+
+							</div>
+						}
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="con2" style="
+    margin-top: 8px;
+">
+		<div class="col-12">
+			<div class="d-grid">
+				<input class="btn bsb-btn-xl btn-primary" type="submit" value=" انشاء جدول تسجيل الحضور" style="
+    width: 100%;
+" />
+			</div>
+		</div>
+	</div>
+</form>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var parentSelect = document.querySelector('[name="parentid"]');
+		var childSelect = document.querySelector('[name="childid"]');
+		var courseSelect = document.querySelector('[name="courseid"]');
+
+		childSelect.disabled = true;
+		courseSelect.disabled = true;
+
+		var selectedParentId; // Declare outside of the event listener
+
+		parentSelect.addEventListener("change", function () {
+			selectedParentId = parentSelect.value;
+
+			childSelect.disabled = true;
+			courseSelect.disabled = true;
+
+			childSelect.innerHTML = '<option selected value="">اختر الجروب</option>';
+			courseSelect.innerHTML = '<option selected value="">اختر المادة</option>';
+
+			if (selectedParentId) {
+				fetch('/Teachers/GetChildStages?parentId=' + selectedParentId)
+					.then((response) => response.json())
+					.then((data) => {
+						data.forEach((child) => {
+							var option = new Option(child.text, child.value);
+							childSelect.add(option);
+						});
+						childSelect.disabled = false;
+					})
+					.catch((error) => console.log(error));
+			}
+		});
+
+		childSelect.addEventListener("change", function () {
+			var selectedChildId = childSelect.value;
+
+			courseSelect.disabled = true;
+			courseSelect.innerHTML = '<option selected value="">اختر المادة</option>';
+
+			if (selectedChildId) {
+				fetch('/Teachers/Getcourses?parentId=' + selectedParentId)
+					.then((response) => response.json())
+					.then((data) => {
+						data.forEach((course) => {
+							var option = new Option(course.text, course.value);
+							courseSelect.add(option);
+						});
+						courseSelect.disabled = false;
+					})
+					.catch((error) => console.log(error));
+			}
+		});
+	});
+</script>
+
+
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<FStudentManagement.Models.CourseWithAbsenceViewModel>
+<link href="~/css/table.css" rel="stylesheet" />
+<style>
+ th {
+  background: #58595b !important;
+  color: white !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+ }
+
+</style>
+@if (Model.Any())
+{
+ <div class="table">
+  <div class="table_section">
+   <table>
+    <thead>
+     <tr>
+      <th>اسم المادة الدراسية</th>
+      <th>عدد الغياب</th>
+     </tr>
+    </thead>
+    <tbody>
+     @foreach (var item in Model)
+     {
+      <tr>
+       <td>@item.Course.Course_Name</td>
+       <td>@item.AbsenceCount</td>
+      </tr>
+     }
+    </tbody>
+   </table>
+  </div>
+ </div>
+}
+else
+{
+ <div class="table">
+  <div class="table_header">
+   <div style="display: flex; flex-direction: column;">
+    <h1>لا يوجد مواد دراسية  </h1>
+   </div>
+  </div>
+ </div>
+}
+
+@section Scripts {
+ <partial name="_ValidationScriptsPartial" />
+}

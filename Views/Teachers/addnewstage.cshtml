@@ -1,0 +1,170 @@
+﻿@model Teacher
+<link href="~/css/create.css" rel="stylesheet" />
+
+<body>
+	<section class="p-3 p-md-4 p-xl-5">
+		<form asp-controller="Teachers" autocomplete="off" lang="ar" asp-action="addnewstage" enctype="multipart/form-data" method="post">
+			<div asp-validation-summary="ModelOnly" role="alert" class="text-danger"></div>
+			<div class="container" dir="ltr">
+				<div class="card border-light-subtle shadow-sm">
+					<div class="con1">
+						<div class="col-12">
+							<div class="mb-5">
+								<h2 class="h3">اضافة مرحلة جديدة</h2>
+								<h3 class="fs-6 fw-normal text-secondary m-0">ادخل ايميل المعلم</h3>
+							</div>
+						</div>
+					</div>
+					<div class="row g-0">
+						<div class="col-12 col-md-6" dir="rtl">
+							<div class="p-3 p-md-4 p-xl-5 ">
+								<div dir="rtl">
+									<div class="labels row gy-3 gy-md-4 overflow-hidden">
+										@if (ViewBag.parents != null)
+										{
+											<div class="sec2 col-12">
+												<label class="form-label">المرحلة الدراسية<span class="text-danger">*</span></label>
+												<select required name="parid" id="parentSelect" asp-items="ViewBag.parents">
+													@if ((ViewBag.parents as SelectList)?.Any() ?? false)
+													{
+														<option value="" selected>اختار المرحلة الدراسية</option>
+													}
+													else
+													{
+														<option value="" selected>لايوجد مراحل دراسية</option>
+													}
+												</select>
+											</div>
+										}
+										else
+										{
+											<div class="sec2 col-12">
+												<h4>يرجى انشاء مرحلة دراسية</h4>
+												<a asp-controller="AddStages" asp-action="GetAllStags" class="btn btn-dark"> انشاء مرحلة دراسية</a>
+											</div>
+										}
+
+										@if (ViewBag.courses != null)
+										{
+											<div class="sec2 col-12">
+												<label class="form-label">المادة<span class="text-danger">*</span></label>
+												<select required name="courseid" id="courseSelect" asp-items="ViewBag.courses" disabled>
+													<option selected>اختار المادة</option>
+												</select>
+											</div>
+										}
+
+										<div class="sub">
+											<div class="subjects">
+												<div class="row">
+													@if (ViewBag.Childs != null)
+													{
+														@foreach (var group in ViewBag.Childs)
+														{
+															<div class="subjects">
+																<input class="form-check-input" type="checkbox" value="@group.Value" name="grouplist">
+																<label>@group.Text</label>
+															</div>
+														}
+													}
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-md-6">
+							<div class="card-body p-3 p-md-4 p-xl-5 mb-3">
+								<div dir="rtl">
+									<div class="labels row gy-3 gy-md-4 overflow-hidden">
+										<div class="col-12">
+											<label for="email" asp-for="SUser.Email" class="form-label">البريد الالكتروني<span class="text-danger">*</span></label>
+											<input type="email" name="emailth" asp-for="SUser.Email" class="form-control" id="email" placeholder="name@example.com">
+											<span asp-validation-for="SUser.Email" class="text-danger"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="con2">
+						<div class="col-12">
+							<div class="d-grid">
+								<input class="btn bsb-btn-xl btn-primary" type="submit" value="اضافة" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</section>
+</body>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var parentSelect = document.getElementById('parentSelect');
+		var courseSelect = document.getElementById('courseSelect');
+		var checkboxContainer = document.querySelector('.subjects');
+		checkboxContainer.style.display = 'none';
+
+		parentSelect.addEventListener("change", function () {
+			var selectedParentId = parentSelect.value;
+
+			if (selectedParentId === "") {
+				courseSelect.disabled = true;
+				checkboxContainer.style.display = 'none';
+			} else {
+				courseSelect.disabled = false;
+
+				courseSelect.innerHTML = '<option selected value="">اختر المادة</option>';
+
+				fetch('/Teachers/Getcourses?parentId=' + selectedParentId)
+					.then((response) => response.json())
+					.then((data) => {
+						data.forEach((course) => {
+							var option = document.createElement("option");
+							option.value = course.value;
+							option.text = course.text;
+							courseSelect.appendChild(option);
+						});
+
+						fetch('/Teachers/GetChildStages?parentId=' + selectedParentId)
+							.then((response) => response.json())
+							.then((checkboxData) => {
+								checkboxContainer.innerHTML = '';
+								checkboxContainer.innerHTML = '<h3>اختر الجروبات</h3>';
+
+								checkboxData.forEach((checkbox) => {
+									var div = document.createElement("div");
+									var input = document.createElement("input");
+									var label = document.createElement("label");
+
+									input.className = "form-check-input";
+									input.type = "checkbox";
+									input.value = checkbox.value;
+									input.required = true;
+									input.name = "grouplist";
+
+									label.textContent = checkbox.text;
+
+									div.className = "subjects";
+									div.appendChild(input);
+									div.appendChild(label);
+
+									checkboxContainer.appendChild(div);
+								});
+
+								checkboxContainer.style.display = 'block';
+							})
+							.catch((error) => console.log(error));
+					})
+					.catch((error) => console.log(error));
+			}
+		});
+	});
+</script>
+
+@section Scripts {
+	@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

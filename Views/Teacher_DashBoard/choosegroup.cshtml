@@ -1,0 +1,80 @@
+﻿@model ChildStage
+@using FStudentManagement.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<SUser> SignInManager
+@inject UserManager<SUser> UserManager
+
+<link href="~/css/display.css" rel="stylesheet" />
+
+@if (User.Identity.IsAuthenticated && SignInManager.IsSignedIn(User))
+{
+ <div class="container" dir="rtl">
+  <h3 class="header">اختر الجروب</h3>
+  <div class="card">
+   <div class="card-body">
+    <form enctype="multipart/form-data" method="post">
+     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+     <div class="col-12">
+      <label class="form-label">المادة<span class="text-danger">*</span></label>
+
+      <select name="courseid" required="true" asp-items="ViewBag.courses" placeholder="">
+       @{
+        var coursess = (ViewBag.courses as SelectList)?.Any() ?? false;
+
+        if (coursess)
+        {
+         <option value="" selected>اختار المادة</option>
+        }
+        else
+        {
+         <option value="" selected>لايوجد مواد لك</option>
+        }
+       }
+      </select>
+
+      <span asp-validation-for="ParentStageId" class="text-danger"></span>
+     </div>
+     <div class="col-12">
+     <label class="form-label">الجروب<span class="text-danger">*</span></label>
+
+     <select  name="parrid" required="true" asp-items="ViewBag.Groups" placeholder="">
+      @{
+       var hasParents = (ViewBag.Groups as SelectList)?.Any() ?? false;
+
+       if (hasParents)
+       {
+        <option value="" selected>اختار الجروب</option>
+       }
+       else
+       {
+        <option value="" selected>لايوجد جروبات</option>
+       }
+      }
+     </select>
+
+     <span asp-validation-for="ParentStageId" class="text-danger"></span>
+     </div>
+     <div class="col-12">
+
+      <label class="form-label">التاريخ<span class="text-danger">*</span></label>
+      <input type="text" class="inp" value="@DateTime.Now" name="datenow" readonly />
+
+     </div>
+     <div style="text-align:center;">
+     <button type="submit" style="
+            margin-top: 25px;
+            width: 216px;"
+            asp-action="Index"  asp-controller="Teacher_DashBoard" class="btn btn-primary">
+      انشاء جدول تسجيل الحضور
+     </button>
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
+
+}
+@section Scripts {
+ <partial name="_ValidationScriptsPartial" />
+}
+

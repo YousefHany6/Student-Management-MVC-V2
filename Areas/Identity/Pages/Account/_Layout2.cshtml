@@ -1,0 +1,25 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>نظام إدارة الطلبة</title>
+ <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+ <link href="~/boxicons/css/boxicons.css" rel="stylesheet" />
+ <link href="~/boxicons/css/boxicons.min.css" rel="stylesheet" />
+<link href="~/css/login.css" rel="stylesheet" />
+<link rel="icon" href="~/favicon.ico" />
+</head>
+<body dir="rtl">
+ <div class="container">
+  <main role="main" class="pb-3">
+   @RenderBody()
+  </main>
+ </div>
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
+ <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+ @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

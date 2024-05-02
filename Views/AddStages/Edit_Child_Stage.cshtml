@@ -1,0 +1,66 @@
+﻿@model FStudentManagement.Models.ChildStage
+
+
+<style>
+	select {
+		display: block;
+		width: 100%;
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: var(--bs-body-color);
+		background-color: var(--bs-body-bg);
+		background-clip: padding-box;
+		border: var(--bs-border-width) solid var(--bs-border-color);
+		border-radius: var(--bs-border-radius);
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	}
+</style>
+<h1>تعديل الجروب</h1>
+
+
+<hr />
+<div class="row">
+	<div class="col-md-4">
+		<form asp-action="Edit_Child_Stage">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<input hidden asp-for="ChildStageId" />
+			<div class="form-floating mb-3">
+				<select asp-for="ParentStageId" aria-required="true"  aria-required="true" asp-items="ViewBag.parents">
+					@{
+						var hasParents = (ViewBag.parents as SelectList)?.Any() ?? false;
+
+						if (hasParents)
+						{
+							<option value="" selected>اختار المرحلة الدراسية</option>
+						}
+						else
+						{
+							<option value="" selected>لايوجد مراحل دراسية</option>
+						}
+					}
+				</select>
+				<span asp-validation-for="ParentStageId" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Name" class="control-label">اسم الجروب</label>
+				<input asp-for="Name" class="form-control" value="@Model.Name" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div style="margin-top:10px;" class="form-group">
+				<input type="submit" value="تعديل" class="btn btn-primary" />
+			</div>
+		</form>
+	</div>
+</div>
+
+<div style="margin-top:10px;">
+	<a asp-controller="AddStages" asp-action="GetAllStags">رجوع الى القائمة</a>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

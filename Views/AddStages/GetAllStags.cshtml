@@ -1,0 +1,331 @@
+﻿@model IEnumerable<ParentStage>
+
+<link href="~/css/page5.css" rel="stylesheet" />
+<style>
+	.ff {
+		display: inline;
+	}
+
+	.row > * {
+		padding:0px;
+	}
+
+	.modal-backdrop {
+		position:relative;
+	}
+</style>
+
+
+<partial name="_Add_Parent_Stage" model="new ParentStage()" />
+<partial name="_Add_Child_Stage" model="new ChildStage()" />
+
+<div class="container" dir="rtl">
+	<h1 class="header">عرض مراحل كلية تكنولوجيا المعلومات</h1>
+	<div class="card ">
+		<div class="card-body con">
+			<div class="row">
+				<div class="col-6 header2" style="
+    margin: auto;
+">
+					<h2 class="header">قسم شبكات</h2>
+				</div>
+
+				@{
+					if (Model.Any())
+					{
+
+						foreach (var item in Model)
+						{
+
+							<div class="card crd">
+								<div class="card-body ">
+									<div class="row inside">
+										<div class="col-6 header2">
+											<h4 class="header" style="
+					color: #ffffff;
+					font-size: 27px;
+					font-weight: 600;
+			">
+												@item.Name
+											</h4>
+										</div>
+										<div class="col-6">
+											<form class="ff" asp-controller="AddStages"
+																	enctype="multipart/form-data" method="get">
+
+												<button type="submit" asp-action="Edit_Parent_Stage" asp-route-id="@item.ParentStageId" class="btn btn-primary">
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+																		class="bi bi-pencil-square" viewBox="0 0 16 16">
+														<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+														<path fill-rule="evenodd"
+																				d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+													</svg>
+												</button>
+											</form>
+
+											<button data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#exampleModal_@item.ParentStageId">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+																	class="bi bi-trash3" viewBox="0 0 16 16">
+													<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+												</svg>
+
+											</button>
+
+											<div class="modal fade" id="exampleModal_@item.ParentStageId" tabindex="-1" aria-labelledby="exampleModal_@item.ParentStageId" aria-hidden="true">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															<h5 class="modal-title" id="exampleModalLabel_@item.ParentStageId">تأكيد الحذف</h5>
+														</div>
+														<div class="modal-body">
+															هل تريد حذف  : @item.Name ؟
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+															<form class="ff" asp-controller="AddStages"
+																					enctype="multipart/form-data" method="post">
+																<button asp-action="Delete_Parent_Stage" asp-route-id="@item.ParentStageId" type="submit" class="btn btn-danger">حذف</button>
+															</form>
+														</div>
+													</div>
+												</div>
+											</div>
+
+
+
+										</div>
+										@if (item.ChildStages != null)
+										{
+
+											@foreach (var child in item.ChildStages)
+											{
+
+												<div class="dropdown-content">
+													<div class="card mb-3">
+														<div class="card-body" >
+															<div class="row">
+																<div class="col-6 header2">
+																	<h4 class="header">@child.Name</h4>
+																</div>
+																<div class="col-6">
+																	<form class="ff" asp-controller="AddStages"
+																							enctype="multipart/form-data" method="get">
+																		<button type="submit" asp-action="Edit_Child_Stage" asp-route-id="@child.ChildStageId" class="btn btn-primary" style="
+					width: 66px;
+					">
+																			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+																								class="bi bi-pencil-square" viewBox="0 0 16 16">
+																				<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+																				<path fill-rule="evenodd"
+																										d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+																			</svg>
+																		</button>
+																	</form>
+
+
+
+																	<button data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#exampleModal_@child.ChildStageId" style="
+					width: 66px;
+					">
+																		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+																							class="bi bi-trash3" viewBox="0 0 16 16">
+																			<path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5" />
+																		</svg>
+																	</button>
+
+																	<div class="modal fade" id="exampleModal_@child.ChildStageId" tabindex="-1" aria-labelledby="exampleModal_@child.ChildStageId" aria-hidden="true">
+																		<div class="modal-dialog">
+																			<div class="modal-content">
+																				<div class="modal-header">
+																					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																					<h5 class="modal-title" id="exampleModalLabel_@child.ChildStageId">تأكيد الحذف</h5>
+																				</div>
+																				<div class="modal-body">
+																					هل تريد حذف  : @child.Name ؟
+																				</div>
+																				<div class="modal-footer">
+																					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+																					<form class="ff" asp-controller="AddStages"
+																											enctype="multipart/form-data" method="post">
+																						<button asp-action="Delete_child_Stage" asp-route-id="@child.ChildStageId" type="submit" class="btn btn-danger">حذف</button>
+																					</form>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+
+
+																</div>
+															</div>
+
+														</div>
+													</div>
+												</div>
+											}
+										}
+										else
+										{
+											<h1 style="color:red;">لايوجد قسم يرجى انشاء قسم</h1>
+										}
+									</div>
+
+								</div>
+							</div>
+						}
+					}
+					else
+					{
+						<h1 style="color:red;">لايوجد مراحل يرجى انشاء مرحلة</h1>
+					}
+				}
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <div class="container" dir="rtl">
+	<h3 class="header">عرض المراحل</h3>
+	<div class="card ">
+		<div class="card-body con">
+			@{@if (Model.Any())
+			{
+				@foreach (var parentStage in Model)
+				{
+					<div class="row">
+						<div class="col-6 header2">
+							<h4 class="header">@parentStage.Name</h4>
+						</div>
+
+						@if (parentStage.ChildStages != null)
+						{
+							@foreach (var childStage in parentStage.ChildStages)
+							{
+								<div class="card crd">
+									<div class="card-body">
+										<div class="row inside">
+											<div class="col-6 header2">
+												<h4 class="header">@childStage.Name</h4>
+											</div>
+											<div class="col-6">
+												<form class="ff" asp-controller="AddStages"
+												enctype="multipart/form-data" method="get">
+													<button type="submit" asp-action="Edit_Child_Stage" asp-route-id="@childStage.ChildStageId" class="btn btn-primary">تعديل</button>
+												</form>
+												<form class="ff" asp-controller="AddStages"
+												enctype="multipart/form-data" method="post">
+													<button asp-action="Delete_child_Stage" asp-route-id="@childStage.ChildStageId" type="submit" class="btn btn-danger">حذف</button>
+												</form>
+												<button type="button" class="icon" data-level="1" data-dropdown="#dropdown-content1">
+													<i class='bx bx-down-arrow-alt'></i>
+												</button>
+											</div>
+													<div class="dropdown-content1">
+														<div class="card mb-3">
+															<div class="card-body">
+																<div class="row">
+																	<div class="col-6 header2">
+																		<h4 class="header"></h4>
+																	</div>
+																	<div class="col-6">
+																		<form class="ff" asp-controller="AddStages"
+																		enctype="multipart/form-data" method="get">
+																			<button type="submit" asp-action="Edit_Term_Stage"  class="btn btn-primary">تعديل</button>
+																		</form>
+																		<form class="ff" asp-controller="AddStages"
+																		enctype="multipart/form-data" method="post">
+																			<button asp-action="Delete_Term_Stage"  type="submit" class="btn btn-danger">حذف</button>
+																		</form>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												}
+											}
+										</div>
+									</div>
+								</div>
+							}
+						}
+					</div>
+				}
+				}
+				else
+				{
+					<h1>لايوجد مراحل يرجى انشاء مرحلة</h1>
+				}
+			}
+		</div>
+	</div>
+</div> *@
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+	<script>
+		$(document).ready(function () {
+			$(".icon").on("click", function () {
+				var level = $(this).data('level');
+				var dropdownContent = $(".dropdown-content" + level);
+				dropdownContent.toggle();
+			});
+		});
+	</script>
+}
+

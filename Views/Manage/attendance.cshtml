@@ -1,0 +1,119 @@
+﻿@model IEnumerable<FStudentManagement.Models.Student>
+
+@{
+	<style>
+		th {
+			background: #58595b !important;
+			color: white !important;
+			font-size: 20px !important;
+			font-weight: 800 !important;
+		}
+
+	</style>
+	if (Model.Any())
+	{
+		<h1>تسجيل حضور الطلاب</h1>
+
+		<form enctype="multipart/form-data" method="post">
+
+
+			<caption>@ViewBag.date</caption>
+			<table class="table" style="
+					text-align: center;
+		">
+				<thead>
+					<tr>
+						<th>
+							اسم الطالب
+						</th>
+						<th>
+							تسجيل
+						</th>
+						<th>
+							حالة الطالب
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							<td>
+								@item.Student_Name
+								<input type="hidden" name="stds" value="@item.Student_ID" />
+							</td>
+							<td>
+								<input type="checkbox" name="attendanceStates" value="@item.Student_ID" class="btn btn-lg" />
+							</td>
+							<td class="attendance-state" style="	font-family: system-ui;
+												font-size: 20px;
+												font-weight: 500;
+												color: red;">
+								غائب
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+			<input type="hidden" name="courseid1" value="@ViewBag.co" />
+			<input type="hidden" name="datenow1" value="@ViewBag.date" />
+			<div style="
+								display: flex;
+								justify-content: center;
+								align-items: center;
+								flex-wrap: wrap;
+								margin-top: 32px;
+								">
+				<input asp-controller="Manage" style="     width: 500px;
+						" asp-action="attendance" type="submit" value="حفظ الجدول" class="btn btn-lg btn-primary mt-5" />
+			</div>
+		</form>
+		<form method="get">
+
+			<button style="
+									float: left;
+									margin: 14px;
+									font-size: 25px;
+
+																		" asp-controller="Manage" asp-action="Create_Table" class="btn btn-primary">
+				رجوع
+			</button>
+		</form>
+	}
+	else
+	{
+		<h2>لايوجد طلاب لهذا المعلم </h2>
+		<a asp-controller="Students" asp-action="Add_Student" class="btn btn-dark">انشاء طالب</a>
+		<form method="get">
+
+			<button style="
+									float: left;
+									margin: 14px;
+									font-size: 25px;
+
+																		" asp-controller="Manage" asp-action="Create_Table" class="btn btn-primary">
+				رجوع
+			</button>
+		</form>
+	}
+}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('input[type="checkbox"]').change(function () {
+			var isChecked = $(this).is(":checked");
+			var $attendanceState = $(this).closest('tr').find('.attendance-state');
+
+			if (isChecked) {
+				$attendanceState.text('حاضر').css("color", "green");
+			} else {
+				$attendanceState.text('غائب').css("color", "red");
+			}
+		});
+	});
+</script>
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
